@@ -1,4 +1,5 @@
 Rails.application.routes.draw do
+  resources :courses
   root "static_pages#landing_page"
 
   get 'landing_page', to: "static_pages#landing_page"
