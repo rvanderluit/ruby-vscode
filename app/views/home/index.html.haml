@@ -1,3 +1,15 @@
-%h1 
-  Home#index
-  %p Find me in app/views/home/index.html.haml
+
+
+%h1
+  Hello#world
+  %p Find me in app/views/home/index.html.erb
+
+
+.fa.fa-flag
+.fab.fa-amazon
+= link_to root_path do
+  .fa.fa-home
+
+= link_to courses_path, class: 'btn btn-success' do
+  .fa.fa-book
+  Course

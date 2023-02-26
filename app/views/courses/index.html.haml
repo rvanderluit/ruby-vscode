@@ -1,22 +1,26 @@
-%h1 Listing courses
-
-%table
-  %thead
-    %tr
-      %th Title
-      %th Description
-      %th
-      %th
-      %th
-
-  %tbody
-    - @courses.each do |course|
+%h1
+  Courses
+  = @courses.count
+.container
+  %table.table
+    %thead
       %tr
-        %td= course.title
-        %td= course.description
-        %td= link_to 'Show', course
-        %td= link_to 'Edit', edit_course_path(course)
-        %td= link_to 'Destroy', course, method: :delete, data: { confirm: 'Are you sure?' }
+        %th Title
+        %th Description
+        %th User
+        %th
+        %th
+        %th
+
+    %tbody
+      - @courses.each do |course|
+        %tr
+          %td= course.title
+          %td= course.description
+          %td= course.user
+          %td= link_to 'Show', course
+          %td= link_to 'Edit', edit_course_path(course)
+          %td= link_to 'Destroy', course, method: :delete, data: { confirm: 'Are you sure?' }
 
 %br
 
