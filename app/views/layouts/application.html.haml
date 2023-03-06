@@ -8,10 +8,11 @@
     = csp_meta_tag
     = stylesheet_link_tag 'application', media: 'all', 'data-turbolinks-track': 'reload'
     = javascript_pack_tag 'application', 'data-turbolinks-track': 'reload'
-
+    %script{:async => "", :crossorigin => "anonymous", :integrity => "sha384-GNFwBvfVxBkLMJpYMOABq3c+d3KnQxudP/mGPkzpZSTYykLBNsZEnG2D9G/X/+7D", :src => "https://cdn.jsdelivr.net/npm/masonry-layout@4.2.2/dist/masonry.pkgd.min.js"}
     %body
     = render 'layouts/header'
     = render 'layouts/messages'
     .container
       %p
       = yield
+      %br

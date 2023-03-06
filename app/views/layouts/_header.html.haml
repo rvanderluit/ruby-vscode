@@ -13,7 +13,7 @@
         
         %li.nav-item{class: "#{'active font-weight-bold' if current_page?(courses_path)}"}
           = link_to courses_path, class: 'nav-link d-flex align-items-center' do
-            .fa.fa-book{ :style => "margin-right: 10px;"}
+            .fa.fa-graduation-cap{ :style => "margin-right: 10px;"}
             Courses
         %li.nav-item{class: "#{'active font-weight-bold' if current_page?(new_course_path)}"}
           = link_to new_course_path, class: 'nav-link d-flex align-items-center' do
@@ -25,13 +25,21 @@
             .fa.fa-users.align-items-center{ :style => "margin-right: 10px;"}
             %p(style="width: 100px; margin-bottom: 0;")="Users"
 
+      /SEARCH IN NAVBAR
       .container
-        = form_tag(courses_path, method: :get) do
-          .input-group
-            = text_field_tag :title, params[:title], autocomplete: 'off', placeholder: "Search", class: 'form-control-sm'
+        = search_form_for @ransack_courses, as: :courses_search, url: courses_path do |f|
+          .input-group 
+            = f.search_field :title_or_short_description_cont, placeholder: "Search", class: 'form-control-sm', style: 'float: left;'
             %span.input-group-append
               %button.btn.btn-primary.btn-sm{:type => "submit"}
-                %span.fa.fa-search{"aria-hidden" => "true"}
+                %span.fa.fa-search{"aria-hidden" => "true"}        
+      -# .container
+      -#   = form_tag(courses_path, method: :get) do
+      -#     .input-group
+      -#       = text_field_tag :title, params[:title], autocomplete: 'off', placeholder: "Search", class: 'form-control-sm'
+      -#       %span.input-group-append
+      -#         %button.btn.btn-primary.btn-sm{:type => "submit"}
+      -#           %span.fa.fa-search{"aria-hidden" => "true"}
       %ul.navbar-nav.mr-right(style="display: flex;")
         %li.nav-item(style="width: 150px;")
           = link_to root_path, class: 'nav-link' do

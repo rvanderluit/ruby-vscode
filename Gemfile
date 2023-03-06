@@ -63,3 +63,4 @@ gem 'simple_form'
 gem 'faker'
 gem 'devise', "~> 4.9.0"
 gem 'friendly_id', '~> 5.4.0'
+gem 'ransack'
