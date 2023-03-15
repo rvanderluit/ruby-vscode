@@ -64,3 +64,5 @@ gem 'faker'
 gem 'devise', "~> 4.9.0"
 gem 'friendly_id', '~> 5.4.0'
 gem 'ransack'
+gem 'public_activity'
+gem 'rolify'

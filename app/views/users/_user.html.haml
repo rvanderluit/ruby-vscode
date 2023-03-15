@@ -1,30 +1,35 @@
-.card(style="width: 300px;")
-  .card-header 
-    .fa.fa-user 
-    = user.email 
-  .card-footer 
-    Signed Up 
-    = time_ago_in_words(user.created_at)
-    ago
-  .card-footer 
-    = 'sign_in_count'.humanize
-    = user.sign_in_count 
-    .row
-    = 'current_sign_in_at'.humanize
-    = user.current_sign_in_at
-    .row
-    = 'last_sign_in_at'.humanize
-    = user.last_sign_in_at 
-    .row 
-    = 'current_sign_in_ip'.humanize
-    = user.current_sign_in_ip
-    .row 
-    = 'last_sign_in_ip'.humanize
-    = user.last_sign_in_ip
-    .row 
-  .card-footer 
-    Confirmed Email?
-    - if user.confirmed_at.present?
-      .badge.bg-success Yes 
-    - else 
-      .badge.bg-danger No 
+.col
+  .card.h-100
+    .card-header 
+      .fa.fa-user 
+      = user.email 
+    .card-footer 
+      Signed Up 
+      = time_ago_in_words(user.created_at)
+      ago
+    .card-footer 
+      = 'sign_in_count'.humanize
+      = user.sign_in_count 
+      .row
+      = 'current_sign_in_at'.humanize
+      = user.current_sign_in_at
+      .row
+      = 'last_sign_in_at'.humanize
+      = user.last_sign_in_at 
+      .row 
+      = 'current_sign_in_ip'.humanize
+      = user.current_sign_in_ip
+      .row 
+      = 'last_sign_in_ip'.humanize
+      = user.last_sign_in_ip
+      .row 
+    .card-footer 
+      Confirmed Email?
+      - if user.confirmed_at.present?
+        .badge.bg-success Yes 
+      - else 
+        .badge.bg-danger No 
+    .card-footer 
+      - user.roles.each do |role|
+        .badge.bg-info
+          = role.name

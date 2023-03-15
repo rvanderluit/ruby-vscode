@@ -3,13 +3,21 @@
     What do you want to learn today?
 
   .p-4 
-  .container.my-2.my-lg-0
-    = form_tag(courses_path, method: :get) do
-      .input-group
-        = text_field_tag :title, params[:title], autocomplete: 'off', placeholder: "Search", class: 'form-control-sm'
+  - if current_user
+    = search_form_for @ransack_courses, as: :courses_search, url: courses_path do |f|
+      .input-group 
+        = f.search_field :title_or_short_description_cont, placeholder: "Search", class: 'form-control-sm', style: 'float: left;'
         %span.input-group-append
           %button.btn.btn-primary.btn-sm{:type => "submit"}
-            %span.fa.fa-search{"aria-hidden" => "true"}
+            %span.fa.fa-search{"aria-hidden" => "true"}        
+
+  -# .container.my-2.my-lg-0
+  -#   = form_tag(courses_path, method: :get) do
+  -#     .input-group
+  -#       = text_field_tag :title, params[:title], autocomplete: 'off', placeholder: "Search", class: 'form-control-sm'
+  -#       %span.input-group-append
+  -#         %button.btn.btn-primary.btn-sm{:type => "submit"}
+  -#           %span.fa.fa-search{"aria-hidden" => "true"}
 
 .card-group 
   .card.card-body
@@ -42,20 +50,23 @@
 %hr
 %h2
   Popular Courses
-.card-columns 
-  - @courses.each do |course|
-    = render 'courses/course', course: course
+.col-lg-10.order-1.order-lg-1
+  .row.row-cols-1.row-cols-md-3.g-4
+    - @courses.each do |course|
+      = render 'courses/course', course: course
 
 %hr
 %h2
-  Top Rated Courses
-.card-columns 
-  - @courses.each do |course|
-    = render 'courses/course', course: course
+Top Rated Courses
+.col-lg-10.order-1.order-lg-1
+  .row.row-cols-1.row-cols-md-3.g-4
+    - @courses.each do |course|
+      = render 'courses/course', course: course
 
 %hr
 %h2
   Latest Courses
-.card-columns 
-  - @latest_courses.each do |course|
-    = render 'courses/course', course: course
+.col-lg-10.order-1.order-lg-1
+  .row.row-cols-1.row-cols-md-3.g-4
+    - @latest_courses.each do |course|
+      = render 'courses/course', course: course

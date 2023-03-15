@@ -1,7 +1,9 @@
-%h1
-  Courses
-  = @courses.count
-
+%h3
+  .text-center
+    Courses
+    .badge.bg-info
+      = @courses.count
+%p
 .row 
   .col-md-2
     /= search_form_for @q do |f|
@@ -18,10 +20,9 @@
       = f.submit
     = link_to 'refresh', courses_path
   .col-lg-10.order-1.order-lg-1
-    .container
-      .row
-        - @courses.each do |course|
-          = render 'courses/course', course: course
+    .row.row-cols-1.row-cols-md-3.g-4
+      - @courses.each do |course|
+        = render 'courses/course', course: course
 
 
 %br

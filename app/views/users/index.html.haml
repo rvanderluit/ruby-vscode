@@ -1,8 +1,14 @@
 
-
-.card-columns(style="width: 1000px;") 
-  - @users.each do|user|
-    = render 'users/user', user: user
+%h3
+  .text-center 
+    Users 
+    .badge.bg-info 
+      = @users.count
+%p
+.col-lg-10.order-1.order-lg-1
+  .row.row-cols-1.row-cols-md-3.g-4
+    - @users.each do|user|
+      = render 'users/user', user: user
     %br
 = search_form_for @q do |f|
 
