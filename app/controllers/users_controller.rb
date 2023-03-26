@@ -1,4 +1,5 @@
 class UsersController < ApplicationController
+    before_action :set_user, only: [:edit, :update]
     def index
         #@users = User.all.order(created_at: :desc)
         @q = User.ransack(params[:q])
@@ -11,7 +12,7 @@ class UsersController < ApplicationController
     
     def update
         if @user.update(user_params)
-            redirect_to users_path, notice: 'User #{@user.email} was updated.'
+            redirect_to users_path, notice: 'User roles were updated.'
         else
             render :edit
         end
