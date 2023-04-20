@@ -3,14 +3,16 @@ class Course < ApplicationRecord
     validates :description, presence: true, length: { :minimum => 5}
 
     belongs_to :user
+    has_many :lessons, dependent: :destroy
     def to_s
         title
+        #puts "Username: #{course.user.username}"
     end
     def self.ransackable_attributes(auth_object = nil)
-        %w[title short_description language level user_email] # add any other attributes you want to allowlist for searching
+        %w[title short_description language level user_email user_id] # add any other attributes you want to allowlist for searching
     end
     def self.ransackable_associations(auth_object = nil)
-        ["email", "short_description"]
+        ["email", "short_description", "user_id", "user_email"] 
     end
     has_rich_text :description
 
