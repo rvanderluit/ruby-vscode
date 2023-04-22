@@ -3,6 +3,13 @@ require "active_support/core_ext/integer/time"
 Rails.application.configure do
   # Settings specified here will take precedence over those in config/application.rb.
 
+  Rails.application.config.middleware.use ExceptionNotification::Rack,
+    email: {
+      deliver_with: :deliver,
+      email_prefix: '[PREFIX] ',
+      sender_address: % {"corsego error" <notifier@example.com>},
+      exception_recipients: %w{exceptions@example.com}
+    }
   # Code is not reloaded between requests.
   config.cache_classes = true
 

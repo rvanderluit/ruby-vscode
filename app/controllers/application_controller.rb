@@ -9,7 +9,12 @@ class ApplicationController < ActionController::Base
   
     before_action :set_global_variables, if: :user_signed_in?
     def set_global_variables
+      puts "partty bryo"
+      puts params[:courses_search]
+      puts "partty bryo"
       @ransack_courses = Course.ransack(params[:courses_search], search_key: :courses_search) #navbar search
+      @courses = @ransack_courses.result.includes(:user)
+      puts @ransack_courses
     end
   
     private

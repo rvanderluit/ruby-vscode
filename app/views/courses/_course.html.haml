@@ -29,7 +29,7 @@
         .col-md-6
           .text-end
             .fa.fa-chalkboard-teacher
-            = course.user&.username #this breaks when logging out // also on the home page, the username is different when the course is listed more than once
+            = link_to course.user&.username, user_path(course.user) #this breaks when logging out // also on the home page, the username is different when the course is listed more than once
             
     - if current_user
       - if policy(course).edit?
