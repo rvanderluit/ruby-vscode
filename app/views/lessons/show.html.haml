@@ -1,4 +1,10 @@
 
+- content_for :title do
+  what   
+  \|
+  = @course.title
+  \|
+  = @lesson.title
 = link_to 'Courses', courses_path
 \/
 = link_to @lesson.course.title, course_path(@lesson.course) 

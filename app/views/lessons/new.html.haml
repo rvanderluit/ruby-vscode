@@ -1,8 +1,24 @@
-.card 
-    .card-header
 
-        %h1 New lesson
+- content_for :title do
+  what   
+  \|
+  = @course.title
+  \|
+  New Lesson
+
+= link_to 'Courses', courses_path 
+\/
+= link_to @course.title, course_path(@course)
+\/
+New
+%p
+.card 
+  .card-header
+        
+    %h3
+      .far.fa-check-square
+      New lesson
     .card-body
-        = render 'form'
+      = render 'form'
     .card-footer
-        = link_to 'Back', course_path(@course)
+      = link_to 'Back', course_path(@course)

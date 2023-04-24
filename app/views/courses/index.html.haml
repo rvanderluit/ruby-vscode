@@ -1,3 +1,7 @@
+- content_for :title do
+  Whatever 
+  \|
+  All Courses
 %h3
   .text-center
     Courses
@@ -31,5 +35,9 @@
       - @courses.each do |course|
         = render 'courses/course', course: course
 
-
+    /!= pagy_nav(@pagy)
+    %p
+    != pagy_bootstrap_nav(@pagy)
+    /!= pagy_bootstrap_nav_js(@pagy)
+    /!= pagy_bootstrap_combo_nav_js(@pagy)
 %br

@@ -3,6 +3,8 @@ class User < ApplicationRecord
          :recoverable, :rememberable, :validatable, :trackable, :confirmable
 
   rolify
+  has_many :courses
+  has_many :enrollments
 
   def to_s
     email
@@ -17,7 +19,6 @@ class User < ApplicationRecord
     self.email.split(/@/).first
   end
   
-  has_many :courses
 
 
   extend FriendlyId
@@ -40,6 +41,10 @@ class User < ApplicationRecord
   def online?
     updated_at > 2.minutes.ago
   end
+
+  def buy_course(course)
+    self.enrollments.create(course: course, price: course.price)
+  end
   private
 
 
@@ -49,5 +54,7 @@ class User < ApplicationRecord
       errors.add(:roles, "must have at least one role")
     end
   end
+
+
 
 end

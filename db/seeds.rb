@@ -6,8 +6,9 @@
 #   movies = Movie.create([{ name: 'Star Wars' }, { name: 'Lord of the Rings' }])
 #   Character.create(name: 'Luke', movie: movies.first)
 
-User.create!(email: 'admin@example.com', password: 'admin@example.com', password_confirmation: 'admin@example.com')
-50.times do
+#User.create!(email: 'admin@example.com', password: 'admin@example.com', password_confirmation: 'admin@example.com')
+PublicActivity.enabled = false
+10.times do
     Course.create!([{
       title: Faker::Educator.course_name,
       description: Faker::TvShows::BojackHorseman.quote,
@@ -18,3 +19,4 @@ User.create!(email: 'admin@example.com', password: 'admin@example.com', password
       price: Faker::Number.between(from:1000, to: 2000)
     }])
   end
+  PublicActivity.enabled = true

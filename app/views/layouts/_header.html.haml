@@ -24,7 +24,10 @@
           = link_to users_path, class: 'nav-link d-flex align-items-center' do
             .fa.fa-users.align-items-center{ :style => "margin-right: 10px;"}
             %p(style=" margin-bottom: 0;")="Users"
-
+        %li.nav-item{class: "#{'active font-weight-bold' if current_page?(enrollments_path)}"}
+          = link_to enrollments_path, class: 'nav-link d-flex align-items-center' do
+            .fa.fa-lock-open.align-items-center{ :style => "margin-right: 10px;"}
+            %p(style=" margin-bottom: 0;")="Enrollments"
         
 
       /SEARCH IN NAVBAR
