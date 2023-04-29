@@ -6,7 +6,9 @@ class UsersController < ApplicationController
   
       @q = User.ransack(params[:q])
       @users = @q.result(distinct: true)
-      authorize @users
+
+      @pagy, @users = pagy(@q.result(distinct: true))
+      authorize @users #this is totally gay. even if youre an admin, it won't let you select the users page.
     end
   
     def show

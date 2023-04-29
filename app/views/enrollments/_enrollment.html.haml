@@ -11,5 +11,7 @@
     %b= enrollment.rating
     .fa.fa-comment
     %small= enrollment.review 
+- if current_user
   .card-footer 
-    = link_to 'Edit Review', edit_enrollment_path(enrollment)
+    - if policy(enrollment).edit?
+      = link_to 'Edit Review', edit_enrollment_path(enrollment)

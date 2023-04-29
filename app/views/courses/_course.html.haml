@@ -8,6 +8,8 @@
     .card-footer 
       .text-center
         = enrollment_button(course)
+        .row
+        = review_button(course)
         /= number_to_currency(course.price)
     .card-footer 
       .fa.fa-tasks

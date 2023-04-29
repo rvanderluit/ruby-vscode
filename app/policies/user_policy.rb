@@ -6,11 +6,17 @@ class UserPolicy < ApplicationPolicy
     end
   end
   def index?
+    puts "partyyyyyyy"
+    puts @user.has_role?(:admin)
+    puts "partyyyyyyy"
     @user.has_role?(:admin)
   end
 
   def edit?
-    #@user.has_role?:admin
+    @user.has_role?:admin
+    puts "EEEpartyyyyyyy"
+    puts @user.has_role?(:admin)
+    puts "EEEpartyyyyyyy"
     @user.has_role?(:admin)
   end
 
