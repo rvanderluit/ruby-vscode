@@ -13,10 +13,10 @@ class Enrollment < ApplicationRecord
   friendly_id :to_s, use: :slugged
 
   def self.ransackable_attributes(auth_object = nil)
-    %w[review rating price user_email] # add any other attributes you want to allowlist for searching
+    %w[review rating price] + _ransackers.keys # add any other attributes you want to allowlist for searching
   end
   def self.ransackable_associations(auth_object = nil)
-    ["review", "rating" "price" "user_email"] 
+    %w[user course]
   end
 
   def to_s
