@@ -3,6 +3,10 @@ class Enrollment < ApplicationRecord
   belongs_to :user
 
   validates :user, :course, presence: true
+
+  validates_presence_of :rating, if: :review? #you have to leave both a rating and a review
+  validates_presence_of :review, if: :rating?
+
   validates_uniqueness_of :user_id, scope: :course_id #so user can't subscribe twice
   validates_uniqueness_of :course_id, scope: :user_id
 
@@ -22,6 +26,18 @@ class Enrollment < ApplicationRecord
   def to_s
     user.to_s + " " + course.to_s
   end
+
+  after_save do
+    unless rating.nil? || rating.zero?
+      course.update_rating
+    end
+  end
+
+  after_destroy do
+    course.update_rating
+  end
+
+
   validate :cant_subscribe_to_own_course
   protected
   def cant_subscribe_to_own_course

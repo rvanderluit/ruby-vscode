@@ -5,12 +5,20 @@ class EnrollmentsController < ApplicationController
   def index
     #@enrollments = Enrollment.all
     #@pagy, @enrollments = pagy(Enrollment.all)
+    @ransack_path = enrollments_path
     @q = Enrollment.ransack(params[:q])
-    @pagy, @enrollments = pagy(@q.result(distinct: true))
+    @pagy, @enrollments = pagy(@q.result.includes(:user))
     authorize @enrollments
   end
 
-  # GET /enrollments/1 or /enrollments/1.json
+  #this pulls all enrollments for all classes created by a teacher
+  def my_students
+    @ransack_path = my_students_enrollments_path
+    @q = Enrollment.joins(:course).where(courses: {user: current_user}).ransack(params[:q])
+    @pagy, @enrollments = pagy(@q.result.includes(:user))
+    render 'index' 
+  end
+
   def show
   end
 
