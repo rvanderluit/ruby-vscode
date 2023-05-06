@@ -4,6 +4,7 @@
   All Courses
 %h3
   .text-center
+    = action_name.humanize
     Courses
     .badge.bg-info
       = @courses.count
@@ -26,8 +27,15 @@
       = f.label :price
       = f.search_field :price_eq, placeholder: 'Price', class: 'form-control form-control-sm'
       = f.label :teacher
-      = f.search_field :user_email_cont, placeholder: 'Email', class: 'form-control form-control-sm' #this shit is broken!!!!
-      / it seems to be something with the ransack. the course doesnt have a user_email tied to it. it seems like its a user id like 1,2,3,etc.
+      = f.search_field :user_email_cont, placeholder: 'Email', class: 'form-control form-control-sm' 
+      = sort_link(@ransack_courses, :average_rating)
+      .row
+      = sort_link(@ransack_courses, :created_at)
+      .row
+      = sort_link(@ransack_courses, :enrollments_count, "Popularity") # shit don't work
+      .row
+      = sort_link(@ransack_courses, :price)
+      .row
       = f.submit
     = link_to 'refresh', @ransack_path
   .col-lg-10.order-1.order-lg-1

@@ -53,26 +53,49 @@
     Learn on your schedule
 %hr
 
-
 %h2
+  .fa.fa-user-graduate
+  Continue Learning
+.col-lg-10.order-1.order-lg-1
+  .row.row-cols-1.row-cols-md-3.g-4
+    - @purchased_courses.each do |course|
+      = render 'courses/course', course: course
+
+%hr
+%h2
+  .fa.fa-chart-line 
   Popular Courses
 .col-lg-10.order-1.order-lg-1
   .row.row-cols-1.row-cols-md-3.g-4
-    - @courses.each do |course|
+    - @popular_courses.each do |course|
       = render 'courses/course', course: course
 
 %hr
 %h2
+  .fa.fa-star
   Top Rated Courses
 .col-lg-10.order-1.order-lg-1
   .row.row-cols-1.row-cols-md-3.g-4
-    - @courses.each do |course|
+    - @top_rated_courses.each do |course|
       = render 'courses/course', course: course
 
 %hr
 %h2
+  .fa.fa-clock
   Latest Courses
 .col-lg-10.order-1.order-lg-1
   .row.row-cols-1.row-cols-md-3.g-4
     - @latest_courses.each do |course|
       = render 'courses/course', course: course
+
+%hr
+%h2
+  .fa.fa-comment
+  What our students are saying
+.col-lg-10.order-1.order-lg-1
+  .row.row-cols-1.row-cols-md-3.g-4
+    - @latest_good_reviews.each do |enrollment|
+      = render 'enrollments/enrollment', enrollment: enrollment
+
+
+%hr

@@ -1,6 +1,8 @@
 class Enrollment < ApplicationRecord
-  belongs_to :course
-  belongs_to :user
+  belongs_to :course, counter_cache: true
+  #Course.find_each { |course| Course.reset_counters(course.id, :enrollments)} # this updates the counter cache number of enrollments
+  belongs_to :user, counter_cache: true
+  #User.find_each { |user| User.reset_counters(user.id, :enrollments)}
 
   validates :user, :course, presence: true
 
@@ -11,7 +13,8 @@ class Enrollment < ApplicationRecord
   validates_uniqueness_of :course_id, scope: :user_id
 
   scope :pending_review, -> {where(rating: [0, nil, ""], review: [0, nil, ""])}
-
+  scope :reviewed, -> {where.not(review: [0, nil, ""])}
+  scope :latest_good_reviews, -> { order(rating: :desc, created_at: :desc).limit(3)}
 
   extend FriendlyId
   friendly_id :to_s, use: :slugged
