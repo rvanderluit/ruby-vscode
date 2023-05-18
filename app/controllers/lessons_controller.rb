@@ -9,6 +9,7 @@ class LessonsController < ApplicationController
   # GET /lessons/1 or /lessons/1.json
   def show
     authorize @lesson
+    current_user.view_lesson(@lesson)
   end
 
   # GET /lessons/new
@@ -68,7 +69,13 @@ class LessonsController < ApplicationController
     # Use callbacks to share common setup or constraints between actions.
     def set_lesson
       @course = Course.friendly.find(params[:course_id])
-      @lesson = Lesson.friendly.find(params[:id])
+      begin
+        @lesson = Lesson.friendly.find(params[:id])
+      rescue ActiveRecord::RecordNotFound
+        # Handle the case when the lesson record is not found
+        # For example, you can redirect to a specific page or display an error message
+        redirect_to course_path(@course), notice: "Lesson was successfully destroyed BRAHHH." 
+      end
     end
 
     # Only allow a list of trusted parameters through.

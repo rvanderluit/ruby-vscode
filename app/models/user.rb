@@ -3,8 +3,9 @@ class User < ApplicationRecord
          :recoverable, :rememberable, :validatable, :trackable, :confirmable
 
   rolify
-  has_many :courses
-  has_many :enrollments
+  has_many :courses, dependent: :nullify
+  has_many :enrollments, dependent: :nullify
+  has_many :user_lessons, dependent: :nullify
 
   def to_s
     email
@@ -45,6 +46,13 @@ class User < ApplicationRecord
   def buy_course(course)
     self.enrollments.create(course: course, price: course.price)
   end
+
+  def view_lesson(lesson)
+    unless self.user_lessons.where(lesson: lesson).any?
+      self.user_lessons.create(lesson: lesson)
+    end
+  end
+
   private
 
 
